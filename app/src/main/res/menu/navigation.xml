@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_categpory"
+        android:icon="@drawable/category"
+        android:title="@string/title_home"
+
+        />
+    <item
+        android:id="@+id/navigation_likes"
+        android:icon="@drawable/ic_action_name"
+        android:title="@string/title_likes"
+
+        />
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_home"
+        />
+    <item
+        android:id="@+id/navigation_shop"
+        android:icon="@drawable/ic_shop"
+        android:title="@string/title_shop"
+
+        />
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/profile"
+        android:title="@string/title_profile"
+
+        />
+</menu>
