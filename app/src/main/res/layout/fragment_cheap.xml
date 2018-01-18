@@ -1,0 +1,239 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.root.shop.Cheap"
+    android:background="#ffffff">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="10"
+    android:orientation="vertical">
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="عنوان الشحن"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/arrow"
+        android:gravity="center_horizontal|center_vertical"
+        android:textColor="@color/prim_color"
+        android:textSize="30dp"
+        android:layout_marginBottom="30dp"/>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:fillViewport="true"
+        android:layout_marginTop="@dimen/activity_horizontal_margin">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="0">
+
+<TableRow>
+            <EditText
+                android:id="@+id/txt_fristname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="3dip"
+                android:textSize="20dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:background="@drawable/corner"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="الأسم"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textSize="20dp"
+                android:textColor="@color/prim_color"/>
+        </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <TableRow android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <EditText
+                    android:id="@+id/txt_secandname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" الأسم الأخير"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="20dp"
+                    android:textColor="@color/prim_color"/>
+            </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <TableRow android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <EditText
+                    android:id="@+id/txt_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="المدينة"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="20dp"
+                    android:textColor="@color/prim_color"/>
+            </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <TableRow android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <EditText
+                    android:id="@+id/txt_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="المنطقة"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="20dp"
+                    android:textColor="@color/prim_color"/>
+            </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <TableRow android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <EditText
+                    android:id="@+id/txt_street"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" الشارع"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="20dp"
+                    android:textColor="@color/prim_color"/>
+            </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <TableRow android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <EditText
+                    android:id="@+id/txt_posta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="الرمز البريدى"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="20dp"
+                    android:textColor="@color/prim_color"/>
+            </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <TableRow android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <EditText
+                    android:id="@+id/txt_phonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:inputType="number"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" رقم الهاتف"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="20dp"
+                    android:textColor="@color/prim_color"/>
+            </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <TableRow android:layout_marginTop="@dimen/activity_horizontal_margin">
+                <EditText
+                    android:id="@+id/txt_altphonenumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dip"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text=" رقم هاتف بديل"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="20dp"
+                    android:textColor="@color/prim_color"/>
+            </TableRow>
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/prim_color"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="حفظ العنوان"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:textColor="@color/prim_color"
+                  android:fontFamily="bold"
+                    android:textSize="15dp"
+                    android:id="@+id/btn_save"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/corner"/>
+            </LinearLayout>
+        </TableLayout>
+
+    </ScrollView>
+</LinearLayout>
+</FrameLayout>

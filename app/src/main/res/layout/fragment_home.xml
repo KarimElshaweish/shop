@@ -1,13 +1,96 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.root.shop.Home">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.root.shop.Home"
+    android:orientation="vertical"
+    android:layout_weight="10">
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        >
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColorHint="#000000"
+            android:id="@+id/serchView"
+            android:searchHintIcon="@string/search"
+            android:background="@drawable/corner"
+            android:queryHint="@string/search"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+    <ss.com.bannerslider.views.BannerSlider
+        android:id="@+id/banner_slider1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="الرئسية" />
-
-</FrameLayout>
+        android:layout_weight="2"
+        app:interval="7000"
+        app:loopSlides="true"
+        app:defaultIndicators="dash"
+        android:scrollbarThumbHorizontal="@color/prim_color"
+        />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/prim_color"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:background="@drawable/new1"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        >
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/prim_color"
+           android:layout_alignParentBottom="true"
+           android:text="أحدث الجوالات"
+           android:textSize="30dp"
+           android:gravity="center"
+           android:textColor="#ffffff"
+           />
+        </RelativeLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="2"
+    android:orientation="vertical"
+    android:weightSum="4"
+    android:layout_marginBottom="@dimen/activity_horizontal_margin">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:scrollbars="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="3dp"
+        android:verticalScrollbarPosition="defaultPosition"
+        android:scrollbarThumbHorizontal="@drawable/scrollviewcolor"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="@color/prim_color"
+        android:text="تخفيضات محدودة "
+        android:gravity="center_horizontal"/>
+</LinearLayout>
+</LinearLayout>
