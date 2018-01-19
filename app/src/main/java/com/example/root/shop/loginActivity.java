@@ -23,6 +23,7 @@ public class loginActivity extends AppCompatActivity {
     private Button btn_creat;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+    private UserSessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,7 @@ public class loginActivity extends AppCompatActivity {
         btn_login=findViewById(R.id.btn_newUser);
         mAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progress);
+        session=new UserSessionManager(this);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,8 +43,8 @@ public class loginActivity extends AppCompatActivity {
         });
     }
     private void userLogin(){
-        String Email=emailText.getText().toString();
-        String Password=passwordText.getText().toString();
+        final String Email=emailText.getText().toString();
+        final String Password=passwordText.getText().toString();
         if(Email.isEmpty()){
             emailText.setError("من فضلك أدخل بريدك الألكترونى");
             return;
@@ -56,6 +58,7 @@ public class loginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        session.CreatUserLoginSession(Email,Password);
                         Intent intent=new Intent(getBaseContext(),MainActivity.class);
                         startActivity(intent);
                     }else {

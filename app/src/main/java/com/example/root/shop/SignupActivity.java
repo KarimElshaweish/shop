@@ -27,6 +27,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     EditText password_txt;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+    private UserSessionManager session;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +36,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         email_txt=findViewById(R.id.email_txt);
         password_txt=findViewById(R.id.pass_txt);
         progressBar=findViewById(R.id.progress);
+        session=new UserSessionManager(getApplicationContext());
         btnNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,8 +46,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mAuth = FirebaseAuth.getInstance();
     }
     private void registerUser(){
-        String Email=email_txt.getText().toString();
-        String Password=password_txt.getText().toString();
+        final String Email=email_txt.getText().toString();
+        final String Password=password_txt.getText().toString();
         if(Email.isEmpty()){
             email_txt.setError("ادخل بريدك الالكترونى");
             email_txt.requestFocus();
@@ -72,6 +74,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
+                    session.CreatUserLoginSession(Email,Password);
                     Toast.makeText(SignupActivity.this, "user register sucessful", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getBaseContext(),MainActivity.class);
                     startActivity(intent);

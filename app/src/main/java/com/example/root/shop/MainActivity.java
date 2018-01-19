@@ -3,6 +3,7 @@ package com.example.root.shop;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+    private UserSessionManager session;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -53,7 +54,13 @@ public class MainActivity extends AppCompatActivity {
         android.support.v4.app.FragmentManager  fragmentManager=getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.content,new Category()).commit();
-
+        session=new UserSessionManager(getApplicationContext());
+        if(session.checkLogin())
+        {
+            finish();
+            Intent intent=new Intent(getApplicationContext(),FristActivity.class);
+            startActivity(intent);
+        }
     }
 
 }
