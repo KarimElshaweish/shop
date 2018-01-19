@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.example.root.shop.loginActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rect1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="11dp"
+        app:srcCompat="@drawable/rr"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="Janna LT"
+        android:text="تسجيل الدخول"
+        android:textColor="#d03645"
+        android:textSize="35dp"
+        />
+
+    <View
+        android:id="@+id/rect1"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/btn_newUser"
+        android:layout_marginBottom="102dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_toEndOf="@+id/imageView4"
+        android:layout_toRightOf="@+id/imageView4"
+        android:background="@drawable/rect" />
+
+    <EditText
+        android:id="@+id/txt_email"
+        style="@android:style/Widget.Holo.EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/rect1"
+        android:layout_alignStart="@+id/rect1"
+        android:layout_alignTop="@+id/rect1"
+        android:background="@drawable/whiterect"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="عنوان بريدك الالكترونى"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:text=""/>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignTop="@+id/rect1"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/txt_email"
+        android:layout_toRightOf="@+id/txt_email"
+        app:srcCompat="@drawable/email_iconldpi" />
+
+    <View
+        android:id="@+id/rect2"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@+id/txt_password"
+        android:layout_alignRight="@+id/txt_password"
+        android:layout_alignTop="@+id/txt_password"
+        android:background="@drawable/rect" />
+
+    <EditText
+        android:id="@+id/txt_password"
+        style="@android:style/Widget.Holo.EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/rect1"
+        android:layout_alignStart="@+id/rect1"
+        android:layout_below="@+id/txt_email"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/whiterect"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="كلمه المرور"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:text=""/>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        android:layout_alignParentLeft="true"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/rect2"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginVertical="5dp"
+        app:srcCompat="@drawable/password_iconldpi" />
+
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="1in"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/btn_newUser"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btn_newUser"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/buttonborder"
+        android:fontFamily="Janna LT"
+        android:text="إنشاء حساب جديد"
+        android:textColor="#d03645"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btn_newUser"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="1in"
+        android:layout_height="30dp"
+        android:layout_above="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/filledbutton"
+        android:fontFamily="Janna LT"
+        android:text="تسجيل الدخول"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
+<ProgressBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/progress"
+    android:visibility="gone"/>
+
+
+</RelativeLayout>
