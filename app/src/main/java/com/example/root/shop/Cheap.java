@@ -7,6 +7,27 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -59,14 +80,142 @@ public class Cheap extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    EditText fnEditText;
+    EditText snEditText;
+    EditText cityEditText;
+    EditText statEditText;
+    EditText streetEditText;
+    EditText postEditText;
+    EditText phoneEditText;
+    EditText altphoneEditText;
+    ProgressBar progressBar;
+    FirebaseAuth mAuth;
+    User values ;
+    String id;
+    String Json_string;
+    View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cheap, container, false);
+         view= inflater.inflate(R.layout.fragment_cheap, container, false);
+
+        Button btn_save=view.findViewById(R.id.btn_save);
+        fnEditText=view.findViewById(R.id.txt_fristname);
+        snEditText=view.findViewById(R.id.txt_secandname);
+        cityEditText=view.findViewById(R.id.txt_city);
+        statEditText=view.findViewById(R.id.txt_state);
+        streetEditText=view.findViewById(R.id.txt_street);
+        postEditText=view.findViewById(R.id.txt_posta);
+        phoneEditText=view.findViewById(R.id.txt_phonenumber);
+        altphoneEditText=view.findViewById(R.id.txt_altphonenumber);
+        progressBar=view.findViewById(R.id.progress);
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // uploadCheapInfo_mysqli(view);
+                try {
+                    String method="userjson";
+                    Background_Task background_task=new Background_Task(getContext());
+                    String result=background_task.execute(method).get();
+                    parsJson(view,result);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return view;
+    }
+    public void parsJson(View view,String result){
+        this.view=view;
+        if(result.isEmpty()){
+            Toast.makeText(view.getContext(), "No Json", Toast.LENGTH_SHORT).show();
+        }else{
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+               JSONArray jsonArray=jsonObject.getJSONArray("server response");
+                int count=0;
+                while (count<jsonObject.length()){
+                    JSONObject jo=jsonArray.getJSONObject(count);
+                    info.name=(jo.getString("Name"));
+                    count++;
+                    break;
+                }
+                fnEditText.setText(info.name);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public void uploadCheapInfo_mysqli(View view){
+        progressBar.setVisibility(View.VISIBLE);
+        String fristName=fnEditText.getText().toString();
+        String secandName=snEditText.getText().toString();
+        String cityName=cityEditText.getText().toString();
+        String stateName=statEditText.getText().toString();
+        String streetName=streetEditText.getText().toString();
+        String Post=postEditText.getText().toString();
+        String AltPhone=altphoneEditText.getText().toString();
+        String Phone=phoneEditText.getText().toString();
+        UserSessionManager sessionManager=new UserSessionManager(getContext());
+        HashMap<String,String>User=sessionManager.getUserDatails();
+        String method="insert";
+        Background_Task background_task=new Background_Task(getContext());
+        background_task.execute(method,fristName,secandName,cityName,
+                stateName,streetName,Post,AltPhone,Phone,User.get("email"));
+        progressBar.setVisibility(View.GONE);
+    }
+    private void showData(DataSnapshot dataSnapshot) {
+        for (DataSnapshot ds:dataSnapshot.child("Users").getChildren()){
+            User user=new User();
+            user.setFName(ds.child(id).getValue(User.class).getFName());
+            user.setSName(ds.child(id).getValue(User.class).getSName());
+            user.setCity(ds.child(id).getValue(User.class).getCity());
+            values=user;
+        }
     }
 
+    public void updateDate(){
+        progressBar.setVisibility(View.VISIBLE);
+        String fristName=fnEditText.getText().toString();
+        String secandName=snEditText.getText().toString();
+        String cityName=cityEditText.getText().toString();
+        String stateName=statEditText.getText().toString();
+        String streetName=streetEditText.getText().toString();
+        int postNumber;
+        if(!postEditText.getText().toString().isEmpty()) {
+             postNumber = Integer.parseInt(postEditText.getText().toString());
+        }else
+            postNumber=0;
+        int phoneNumber;
+        if(!phoneEditText.getText().toString().isEmpty()) {
+             phoneNumber = Integer.parseInt(phoneEditText.getText().toString());
+        }else
+             phoneNumber=0;
+        int altPhoneNumber;
+        if(!altphoneEditText.getText().toString().isEmpty()) {
+             altPhoneNumber = Integer.parseInt(altphoneEditText.getText().toString());
+        }else
+            altPhoneNumber=0;
+        FirebaseUser user=mAuth.getCurrentUser();
+        if(user!=null){
+            User mUser1=new User(fristName,secandName,cityName,stateName,streetName,phoneNumber
+            ,altPhoneNumber,postNumber);
+            DatabaseReference mDatabaseReference=FirebaseDatabase.getInstance().getReference();
+            String[] idName=user.getEmail().split("@");
+            mDatabaseReference.child("Users").child(idName[0]).setValue(mUser1);
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+    public void get_json(View view) throws ExecutionException, InterruptedException {
+        String method="userjson";
+        Background_Task background_task=new Background_Task(getContext());
+        background_task.execute(method).get();
+        Toast.makeText(view.getContext(),info.name, Toast.LENGTH_SHORT).show();
+    }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -80,8 +229,6 @@ public class Cheap extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
         }
     }
 

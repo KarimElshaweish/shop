@@ -40,15 +40,18 @@ public class UserSessionManager {
         }
         return false;
     }
+
     public boolean IsUserLogiedIn(){
         return pref.getBoolean(IS_USER_LOGIN,false);
     }
+
     public HashMap<String,String>getUserDatails(){
         HashMap<String,String>user=new HashMap<>();
         user.put(KEY_EMAIL,pref.getString(KEY_EMAIL,null));
         user.put(KEY_PASSWORD,pref.getString(KEY_PASSWORD,null));
         return user;
     }
+
     public void LogigOut(){
         editor.clear();
         editor.commit();

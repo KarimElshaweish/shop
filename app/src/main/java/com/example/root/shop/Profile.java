@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -71,6 +72,26 @@ public class Profile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_profile, container, false);
+       final android.support.v7.widget.AppCompatTextView cheap_edittext= (AppCompatTextView)view.findViewById(R.id.cheap_text);
+        cheap_edittext.setOnTouchListener(new View.OnTouchListener() {
+            final int DRAWABLE_LEFT = 0;
+            final int DRAWABLE_TOP = 1;
+            final int DRAWABLE_RIGHT = 2;
+            final int DRAWABLE_BOTTOM = 3;
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if(motionEvent.getX() <= (cheap_edittext.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width()))                         // your action here
+                    {
+                        Fragment fragment=new Cheap();
+                        FragmentManager fragmentManager=getActivity().getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.content,fragment).commit();
+                    }
+                    return true;
+                }
+                return true;
+            }
+        });
         final android.support.v7.widget.AppCompatTextView editText_info=(android.support.v7.widget.AppCompatTextView)view.findViewById(R.id.info_text);
         editText_info.setOnTouchListener(new View.OnTouchListener() {
             @Override
