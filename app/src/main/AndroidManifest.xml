@@ -17,14 +17,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
         </activity>
         <activity android:name=".info_act" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".loginActivity" />
-        <activity android:name=".FristActivity">
-        </activity>
+        <activity android:name=".FristActivity" />
+        <activity android:name=".paypalCheck" />
+        <activity android:name=".Mobile" />
+        <activity android:name=".Covers" />
+        <activity android:name=".Sound" />
+        <activity android:name=".Cable" />
+        <activity android:name=".PowerBank" />
+        <activity android:name=".Electornic"></activity>
     </application>
 
 </manifest>

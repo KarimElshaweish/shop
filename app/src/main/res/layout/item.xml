@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_marginLeft="30dp">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/img"
+        android:src="@drawable/iphonex"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="أيفون X"
+        android:id="@+id/text_name"
+        android:textColor="@color/prim_color"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Apple iPhone X 256GB Black"
+        android:textColor="@color/prim_color"
+        android:gravity="center_horizontal"
+        android:id="@+id/text_decription"
+        />
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="2600ريال"
+            android:textColor="@color/prim_color"
+            android:id="@+id/txt_price"
+            android:layout_gravity="center_vertical"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:id="@+id/img_like"
+            android:src="@drawable/like_iconmdpi"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:paddingLeft="@dimen/activity_vertical_margin">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/img"
+        android:src="@drawable/iphonex"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/img"
+        android:layout_alignRight="@+id/img"
+        android:layout_below="@+id/img"
+        android:background="@drawable/corner"
+        android:text="أجهزة الموبايل"
+        android:padding="10dp"
+        android:textSize="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal|center_vertical"
+        android:textColor="@color/prim_color"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
+</RelativeLayout>

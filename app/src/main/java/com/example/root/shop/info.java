@@ -5,5 +5,5 @@ package com.example.root.shop;
  */
 
 public  class info {
-    public  static String name="";
+    public  static String Fname="", Sname="",City="",State="",Street="",AltPhone="",Phone="";
 }

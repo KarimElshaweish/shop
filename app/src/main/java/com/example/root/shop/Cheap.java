@@ -1,6 +1,8 @@
 package com.example.root.shop;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.root.shop.config.Config;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -20,11 +23,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -94,11 +102,15 @@ public class Cheap extends Fragment {
     String id;
     String Json_string;
     View view;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
          view= inflater.inflate(R.layout.fragment_cheap, container, false);
+          //paypal serv
 
         Button btn_save=view.findViewById(R.id.btn_save);
         fnEditText=view.findViewById(R.id.txt_fristname);
@@ -110,25 +122,27 @@ public class Cheap extends Fragment {
         phoneEditText=view.findViewById(R.id.txt_phonenumber);
         altphoneEditText=view.findViewById(R.id.txt_altphonenumber);
         progressBar=view.findViewById(R.id.progress);
+        try {
+            String method="userjson";
+            Background_Task background_task=new Background_Task(getContext());
+            String result=background_task.execute(method).get();
+            parsJson(view,result);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // uploadCheapInfo_mysqli(view);
-                try {
-                    String method="userjson";
-                    Background_Task background_task=new Background_Task(getContext());
-                    String result=background_task.execute(method).get();
-                    parsJson(view,result);
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+              uploadCheapInfo_mysqli(view);
             }
         });
         return view;
     }
     public void parsJson(View view,String result){
+        UserSessionManager sessionManager=new UserSessionManager(getContext()) ;
+        HashMap<String,String>User=sessionManager.getUserDatails();
         this.view=view;
         if(result.isEmpty()){
             Toast.makeText(view.getContext(), "No Json", Toast.LENGTH_SHORT).show();
@@ -137,13 +151,29 @@ public class Cheap extends Fragment {
                 JSONObject jsonObject = new JSONObject(result);
                JSONArray jsonArray=jsonObject.getJSONArray("server response");
                 int count=0;
-                while (count<jsonObject.length()){
+                int i=jsonArray.length();
+                while (count<=i){
                     JSONObject jo=jsonArray.getJSONObject(count);
-                    info.name=(jo.getString("Name"));
+                    if(jo.getString("Email").equals(User.get("email"))) {
+                        info.Fname = (jo.getString("FName"));
+                        info.Sname=(jo.getString("LName"));
+                        info.City=(jo.getString("City"));
+                        info.State=(jo.getString("State"));
+                        info.Street=jo.getString("Street");
+                        info.Phone=jo.getString("PhoneNumber");
+                        info.AltPhone=jo.getString("AltPhoneNumber");
+                        break;
+                    }
                     count++;
-                    break;
+
                 }
-                fnEditText.setText(info.name);
+                fnEditText.setText(info.Fname);
+                snEditText.setText(info.Sname);
+                cityEditText.setText(info.City);
+                statEditText.setText(info.State);
+                streetEditText.setText(info.Street);
+                phoneEditText.setText(info.Phone);
+                altphoneEditText.setText(info.AltPhone);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -214,7 +244,7 @@ public class Cheap extends Fragment {
         String method="userjson";
         Background_Task background_task=new Background_Task(getContext());
         background_task.execute(method).get();
-        Toast.makeText(view.getContext(),info.name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(view.getContext(),info.Fname, Toast.LENGTH_SHORT).show();
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

@@ -1,12 +1,16 @@
 package com.example.root.shop;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.Toast;
 
 
@@ -60,12 +64,52 @@ public class Category extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    GridView gridView;
+    String Letter[]={"أجهزة موبايل","كفرات","شواحن وكبايل","ملحقات الصوت","بطاريات متنقلة","منوعات إلكترونية"};
+    int Icons[]={R.drawable.iphonex,R.drawable.covers,R.drawable.cabl,R.drawable.sound,R.drawable.powerbank,R.drawable.iphonex};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false);
+         View view= inflater.inflate(R.layout.fragment_category, container, false);
+         gridView=view.findViewById(R.id.gridView);
+         GridViewAdapter adapter=new GridViewAdapter(Icons,Letter,getContext());
+         gridView.setAdapter(adapter);
+         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+             @Override
+             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                 Intent intent;
+                    switch (i){
+                        case 0:
+                             intent=new Intent(getContext(),Mobile.class);
+                            startActivity(intent);
+                            break;
+                        case 1:
+                            intent=new Intent(getContext(),Covers.class);
+                            startActivity(intent);
+                            break;
+                        case 2:
+                            intent=new Intent(getContext(),Cable.class);
+                            startActivity(intent);
+                            break;
+                        case 3:
+                            intent =new Intent(getContext(),Sound.class);
+                            startActivity(intent);
+                            break;
+                        case 4:
+                            intent=new Intent(getContext(),PowerBank.class);
+                            startActivity(intent);
+                            break;
+                        case 5:
+                            intent=new Intent(getContext(),Electornic.class);
+                            startActivity(intent);
+                            break;
+
+                    }
+             }
+         });
+         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
