@@ -61,7 +61,7 @@
            android:background="@color/prim_color"
            android:layout_alignParentBottom="true"
            android:text="أحدث الجوالات"
-           android:textSize="30dp"
+           android:textSize="25dp"
            android:gravity="center"
            android:textColor="#ffffff"
            />

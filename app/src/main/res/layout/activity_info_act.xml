@@ -18,15 +18,11 @@
            android:src="@drawable/black_arrow"
            android:layout_marginLeft="@dimen/activity_horizontal_margin"
            android:id="@+id/imageView_back"/>
-        <ss.com.bannerslider.views.BannerSlider
-            android:id="@+id/banner_slider_info"
+        <ImageView
+            android:id="@+id/headimg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            app:interval="7000"
-            app:loopSlides="true"
-            app:defaultIndicators="dash"
-            android:scrollbarThumbHorizontal="@color/prim_color"
             />
     </RelativeLayout>
     <View
@@ -118,4 +114,13 @@
         android:id="@+id/spinner1"
         >
     </Spinner>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/filledbutton"
+        android:text="شحن الأن"
+        android:id="@+id/cheap_btn"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ffffff"
+        android:layout_marginTop="@dimen/activity_vertical_margin"/>
 </LinearLayout>

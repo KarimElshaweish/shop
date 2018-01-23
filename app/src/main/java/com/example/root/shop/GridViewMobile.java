@@ -22,7 +22,18 @@ public class GridViewMobile extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private String Decription[];
     private String price[];
-    public GridViewMobile(int[] icons, String[] letter, Context ctx, String[] decription,String[]Price) {
+    private boolean like=false;
+
+    public GridViewMobile(int[] icons, String[] letter, Context ctx, String[] decription, String[] price, boolean like) {
+        this.icons = icons;
+        Letter = letter;
+        this.ctx = ctx;
+        Decription = decription;
+        this.price = price;
+        this.like = like;
+    }
+
+    public GridViewMobile(int[] icons, String[] letter, Context ctx, String[] decription, String[]Price) {
         this.icons = icons;
         Letter = letter;
         this.ctx = ctx;
@@ -60,6 +71,10 @@ public class GridViewMobile extends BaseAdapter {
         Dec.setText(Decription[i]);
         Name.setText(Letter[i]);
         Price.setText(price[i]);
+        if(like){
+            ImageView likeimg=gridView.findViewById(R.id.img_like);
+            likeimg.setImageResource(R.drawable.like_fill);
+        }
         return gridView;
     }
 }

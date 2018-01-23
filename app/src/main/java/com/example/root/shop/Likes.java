@@ -7,7 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 /**
@@ -60,14 +63,32 @@ public class Likes extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    GridView gridView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_likes, container, false);
+        View view= inflater.inflate(R.layout.fragment_likes, container, false);
+        info inf=new info();
+        gridView=view.findViewById(R.id.gridView);
+        GridViewMobile gridViewMobile=new GridViewMobile(intLTA(inf.Draw()),stringLTA(inf.Name()),getContext(),stringLTA(inf.Dec()),stringLTA(inf.Price()),true);
+        gridView.setAdapter(gridViewMobile);
+         return view;
     }
-
+   int [] intLTA(ArrayList arrayList){
+        int []arr=new int[arrayList.size()];
+        for(int i=0;i<arrayList.size();i++){
+            arr[i]= (int) arrayList.get(i);
+        }
+        return arr;
+   }
+   String [] stringLTA(ArrayList arrayList){
+       String[]arr=new String[arrayList.size()];
+       for(int i=0;i<arrayList.size();i++){
+           arr[i]= (String) arrayList.get(i);
+       }
+       return arr;
+   }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {

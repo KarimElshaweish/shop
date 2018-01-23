@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
@@ -19,7 +20,7 @@ import ss.com.bannerslider.views.BannerSlider;
 
 public class info_act extends AppCompatActivity {
 
-    BannerSlider bannerSlider;
+    ImageView head;
     ImageView mInfoImageView;
     ExpandableRelativeLayout expandableRelativeLayout;
     Spinner spinner1;
@@ -27,24 +28,22 @@ public class info_act extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_act);
-        bannerSlider=findViewById(R.id.banner_slider_info);
-        List<Banner> banners=new ArrayList<>();
-        //add banner using image url
-        // banners.add(new RemoteBanner("Put banner image url here ..."));
-        //add banner using resource drawable
-        banners.add(new DrawableBanner(R.drawable.iphonex));
-        banners.add(new DrawableBanner(R.drawable.iphonex));
-        banners.add(new DrawableBanner(R.drawable.iphonex));
-        mInfoImageView=findViewById(R.id.image_view_seeinfo);
+        head=findViewById(R.id.headimg);
+        info inf=new info();
+        head.setImageResource(inf.img);
+        TextView txt=findViewById(R.id.text_decription);
+        txt.setText(getIntent().getStringExtra("dec"));
         expandableRelativeLayout=findViewById(R.id.moreinfo);
+        mInfoImageView=findViewById(R.id.image_view_seeinfo);
         mInfoImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 expandableRelativeLayout.toggle();
             }
         });
+
         spinner1=findViewById(R.id.spinner1);
-        String[]items=new String[]{"اللون","1","2","3"};
+        String[]items=new String[]{"اللون","أسود","ابيض"};
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,items);
         spinner1.setAdapter(adapter);
     }

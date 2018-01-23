@@ -35,7 +35,7 @@ class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mtitle.setText(mDataSet.get(position));
+        holder.mtitle.setText("20ريال");
         holder.mbackground.setBackgroundResource(images.get(position));
         holder.mbackground.setOnClickListener(new View.OnClickListener() {
             @Override
