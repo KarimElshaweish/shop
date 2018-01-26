@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class PowerBank extends AppCompatActivity {
     String Name="بوربانك شاومى";
     String Dec="Xomai PowerBank";
@@ -45,6 +47,12 @@ public class PowerBank extends AppCompatActivity {
                             inf.addDraw(icons[i]);
                             inf.addPrice(Prices[i]);
                             inf.addName(Names[i]);
+                            String method="insertLike";
+                            Background_Task background_task=new Background_Task(getBaseContext());
+                            UserSessionManager sessionManager=new UserSessionManager(getBaseContext());
+                            HashMap<String,String> User=sessionManager.getUserDatails();
+                            background_task.execute(method,Names[i],User.get("email"),"Powerbank");
+
                         }
                         else
                             imageView.setImageResource(R.drawable.like_iconmdpi);

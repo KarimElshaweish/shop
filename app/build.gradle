@@ -37,6 +37,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'com.github.aakira:expandable-layout:1.4.2@aar'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.15.3'
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'

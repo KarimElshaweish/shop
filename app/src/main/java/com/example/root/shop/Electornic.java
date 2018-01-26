@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.util.HashMap;
+
 public class Electornic extends AppCompatActivity {
     String Name="جهاز كمبيوتر";
     String Dec="Computer devices";
@@ -44,6 +46,12 @@ public class Electornic extends AppCompatActivity {
                             inf.addDraw(icons[i]);
                             inf.addPrice(Prices[i]);
                             inf.addName(Names[i]);
+                            String method="insertLike";
+                            Background_Task background_task=new Background_Task(getBaseContext());
+                            UserSessionManager sessionManager=new UserSessionManager(getBaseContext());
+                            HashMap<String,String> User=sessionManager.getUserDatails();
+                            background_task.execute(method,Names[i],User.get("email"),"electronic");
+
                         }
                         else
                             imageView.setImageResource(R.drawable.like_iconmdpi);

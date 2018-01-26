@@ -7,7 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 /**
@@ -60,12 +66,42 @@ public class ShopFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    ListView listView;
+    ArrayList<Integer>icons=new ArrayList<>();
+    ArrayList<String>Name=new ArrayList<>();
+    ArrayList<String>Dec=new ArrayList<>();
+    ArrayList<String>Price=new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop, container, false);
+         View view= inflater.inflate(R.layout.fragment_shop, container, false);
+        listView=view.findViewById(R.id.shop_list);
+        icons.add(R.drawable.iphonex);
+        icons.add(R.drawable.sound);
+        Name.add("iPhoneX");
+        Name.add("GPL");
+        Dec.add("Smart phone");
+        Dec.add("Sound System");
+        Price.add("2500ريال");
+        Price.add("500ربال");
+        final ListViewAdapt listViewAdapt=new ListViewAdapt(icons,Name,Dec,Price,getContext());
+        listView.setAdapter(listViewAdapt);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                Button btn=view.findViewById(R.id.btn_remove);
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ArrayAdapter<String>adapter= (ArrayAdapter<String>) listView.getAdapter();
+                        adapter.remove(adapter.getItem(i));
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

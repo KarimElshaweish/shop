@@ -21,6 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
 
 /**
  * Created by root on 1/20/18.
@@ -59,8 +60,10 @@ public class Background_Task extends AsyncTask<String,Void,String> {
 
     @Override
     protected String doInBackground(String... voids) {
+        //remember the is ip must change
         String cheap_url="http://192.168.1.10/Insert.php";
         String json_url="http://192.168.1.10/json_get_data.php";
+        String Like_url="http://192.168.1.5/like_insert.php";
         String method=voids[0];
         if(method.equals("insert")){
             String Fname=voids[1],
@@ -110,6 +113,36 @@ public class Background_Task extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             }
 
+        }
+        else if(method.equals("insertLike")){
+            String item=voids[1],
+                    Email=voids[2],
+                    cat=voids[3];
+            try {
+                URL url=new URL(Like_url);
+                HttpURLConnection httpURLConnection= (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                OutputStream os=httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter=new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
+                String data= URLEncoder.encode("email","UTF-8")+"="+URLEncoder.
+                        encode(Email,"UTF-8")+"&"+
+                        URLEncoder.encode("item","UTF-8")+"="+URLEncoder.
+                        encode(item,"UTF-8")+"&"+
+                        URLEncoder.encode("table","UTF-8")+"="+URLEncoder.encode("user_likes","UTF-8")+"&"+
+                        URLEncoder.encode("cat","UTF-8")+"="+URLEncoder.encode(cat,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                os.close();
+                InputStream inputStream=httpURLConnection.getInputStream();
+                inputStream.close();
+                return "success";
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if (method.equals("userjson")){
             try {

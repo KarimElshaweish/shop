@@ -1,12 +1,27 @@
 package com.example.root.shop;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
+import com.soundcloud.android.crop.Crop;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -59,13 +74,43 @@ public class information extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+    private int PICK_IMAGE_REQUEST = 1;
+    CircleImageView profile_image;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_information, container, false);
+        View view= inflater.inflate(R.layout.fragment_information, container, false);
+        profile_image=view.findViewById(R.id.profile_image);
+        ImageView imgView=view.findViewById(R.id.left_arrow);
+        imgView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,PICK_IMAGE_REQUEST);
+            }
+        });
+        return view;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            try {
+                info.prof_imag = data.getData();
+                Bitmap imgBitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), info.prof_imag);
+                profile_image.setImageBitmap(imgBitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

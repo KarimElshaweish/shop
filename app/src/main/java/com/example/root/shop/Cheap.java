@@ -121,8 +121,9 @@ public class Cheap extends Fragment {
         postEditText=view.findViewById(R.id.txt_posta);
         phoneEditText=view.findViewById(R.id.txt_phonenumber);
         altphoneEditText=view.findViewById(R.id.txt_altphonenumber);
+
         progressBar=view.findViewById(R.id.progress);
-        try {
+      /*  try {
             String method="userjson";
             Background_Task background_task=new Background_Task(getContext());
             String result=background_task.execute(method).get();
@@ -131,7 +132,7 @@ public class Cheap extends Fragment {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

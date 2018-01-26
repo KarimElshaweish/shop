@@ -1,20 +1,12 @@
 package com.example.root.shop;
 
-import android.app.Activity;
-import android.app.Instrumentation;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.root.shop.config.Config;
-import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -24,57 +16,13 @@ import com.paypal.android.sdk.payments.PaymentConfirmation;
 import org.json.JSONException;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-import ss.com.bannerslider.banners.Banner;
-import ss.com.bannerslider.banners.DrawableBanner;
-import ss.com.bannerslider.views.BannerSlider;
-
-public class info_act extends AppCompatActivity {
-
-    ImageView head;
-    ImageView mInfoImageView;
-    ExpandableRelativeLayout expandableRelativeLayout;
-    Spinner spinner1;
-    String amount;
+public class paypalCheck extends AppCompatActivity {
+    String amount="";
     private static final int  PAYPAL_REQUEST_CODE=7171;
     private PayPalConfiguration config=new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_act);
-        head=findViewById(R.id.headimg);
-        info inf=new info();
-        head.setImageResource(inf.img);
-        TextView txt=findViewById(R.id.text_decription);
-        txt.setText(getIntent().getStringExtra("dec"));
-        expandableRelativeLayout=findViewById(R.id.moreinfo);
-        mInfoImageView=findViewById(R.id.image_view_seeinfo);
-        mInfoImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                expandableRelativeLayout.toggle();
-            }
-        });
-        Button btn=findViewById(R.id.cheap_btn);
-        Intent intent=new Intent(this,PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
-        startService(intent);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Toast.makeText(getBaseContext(), "تم الشحن للعنوان المدون", Toast.LENGTH_SHORT).show();
-                processAmount();
-            }
-        });
-        spinner1=findViewById(R.id.spinner1);
-        String[]items=new String[]{"اللون","أسود","ابيض"};
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,R.layout.support_simple_spinner_dropdown_item,items);
-        spinner1.setAdapter(adapter);
-    }
     private void processAmount(){
         amount="5";
         PayPalPayment payPalPayment=new PayPalPayment(new BigDecimal(String.valueOf(amount)),"USD",
@@ -99,7 +47,7 @@ public class info_act extends AppCompatActivity {
                     }
                 }
             }
-            else if(resultCode== Activity.RESULT_CANCELED)
+            else
                 Toast.makeText(this, "Cansel", Toast.LENGTH_SHORT).show();
         }
         else if(resultCode==PaymentActivity.RESULT_EXTRAS_INVALID){
@@ -111,5 +59,15 @@ public class info_act extends AppCompatActivity {
     protected void onDestroy() {
         stopService(new Intent(this,PayPalService.class));
         super.onDestroy();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_paypal_check);
+        Button Btn=findViewById(R.id.button2);
+        Intent intent=new Intent(this,PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        startService(intent);
     }
 }

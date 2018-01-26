@@ -1,5 +1,9 @@
 package com.example.root.shop;
 
+import android.net.Uri;
+
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +14,7 @@ import java.util.List;
 public  class info {
     public  static String Fname="", Sname="",City="",State="",Street="",AltPhone="",Phone="";
     public static int img;
+    public static Uri prof_imag=null;
    private static ArrayList<String>ListDec=new ArrayList<>();
    private static ArrayList<Integer>ListDraw=new ArrayList<>();
    private static ArrayList<String>ListName=new ArrayList<>();
